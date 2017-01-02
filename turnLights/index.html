@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+      * {padding: 0; margin: 0;}
+      #wrapper {width: 100px; height:300px; margin: 20px auto;}
+      #wrapper li {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        list-style: none;
+        margin: 10px;
+        transition: background-color .5s;
+      }
+      .default {
+        background-color: gray;
+      }
+      .red {
+        background-color: red;
+      }
+      .yellow {
+        background-color: yellow;
+      }
+      .green {
+        background-color: green;
+      }
+
+    </style>
+    <title>红绿灯</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <ul>
+        <li class="default"></li>
+        <li class="default"></li>
+        <li class="default"></li>
+      </ul>
+    </div>
+  </body>
+  <script type="text/javascript">
+    const lis = document.querySelector("#wrapper ul").querySelectorAll("li");
+    const colors = ["red", "yellow", "green"];
+
+    start(lis, colors);
+
+    function start(lis, colors) {
+      let lightOn = 0;
+      function turnLight(number) {
+        lis[number].setAttribute("class", colors[number]);
+      }
+      function offLight(number) {
+        if(number==0){
+          lis[colors.length-1].setAttribute("class", "default");
+        }else {
+          lis[number-1].setAttribute("class", "default");
+        }
+      }
+
+      function withOne() {
+        if(lightOn > 2){
+          lightOn = 0;
+          number = lightOn;
+        }else {
+          number = lightOn;
+        }
+        lightOn++;
+        offLight(number);
+        turnLight(number);
+      }
+
+      setInterval(withOne, 2000);
+    }
+
+  </script>
+</html>
