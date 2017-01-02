@@ -42,31 +42,32 @@
     const lis = document.querySelector("#wrapper ul").querySelectorAll("li");
     const colors = ["red", "yellow", "green"];
 
-    start(lis, colors);
+    start(lis, colors); //入口，需要元素和颜色
 
     function start(lis, colors) {
-      let lightOn = 0;
-      function turnLight(number) {
-        lis[number].setAttribute("class", colors[number]);
+      let lightOn = 0;  //当前哪个灯亮
+
+      function turnLight(index) {
+        lis[index].setAttribute("class", colors[index]);
       }
-      function offLight(number) {
-        if(number==0){
+      function offLight(index) {
+        if(index==0){
           lis[colors.length-1].setAttribute("class", "default");
         }else {
-          lis[number-1].setAttribute("class", "default");
+          lis[index-1].setAttribute("class", "default");
         }
       }
 
+      // 得到亮灯索引，执行开关灯操作，索引指向下一个
       function withOne() {
+        let index = 0;
         if(lightOn > 2){
           lightOn = 0;
-          number = lightOn;
-        }else {
-          number = lightOn;
         }
+        index = lightOn;
         lightOn++;
-        offLight(number);
-        turnLight(number);
+        offLight(index);
+        turnLight(index);
       }
 
       setInterval(withOne, 2000);
