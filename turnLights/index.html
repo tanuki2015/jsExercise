@@ -45,31 +45,27 @@
     start(lis, colors); //入口，需要元素和颜色
 
     function start(lis, colors) {
-      let lightOn = 0;  //当前哪个灯亮
+      let index = 0;  //当前哪个灯亮
 
-      function turnLight(index) {
-        lis[index].setAttribute("class", colors[index]);
+      function turnLight(thisOne) {
+        lis[thisOne].setAttribute("class", colors[thisOne]);
       }
-      function offLight(index) {
-        if(index==0){
+      function offLight(thisOne) {
+        if(thisOne==0){
           lis[colors.length-1].setAttribute("class", "default");
         }else {
-          lis[index-1].setAttribute("class", "default");
+          lis[thisOne-1].setAttribute("class", "default");
         }
       }
-
-      // 得到亮灯索引，执行开关灯操作，索引指向下一个
+      // 得到亮灯索引，索引指向下一个,执行开关灯操作
       function withOne() {
-        let index = 0;
-        if(lightOn > 2){
-          lightOn = 0;
+        if(index > 2){
+          index = 0;
         }
-        index = lightOn;
-        lightOn++;
         offLight(index);
         turnLight(index);
+        index++;
       }
-
       setInterval(withOne, 2000);
     }
 
