@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>看看click的用法</title>
+  </head>
+  <body>
+    <button class="button" type="button" name="button">press me</button>
+  </body>
+  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    const btn = document.querySelector(".button");
+    console.log(btn);
+
+    $(document).ready(function(){
+      $(".button").click(function(){
+        console.log(this);
+      })
+    })
+    // 添加dom对象的click时间响应方法。
+  </script>
+</html>
