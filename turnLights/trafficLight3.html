@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+      * {padding: 0; margin: 0;}
+      #wrapper {width: 100px; height:300px; margin: 20px auto;}
+      #wrapper li {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        list-style: none;
+        margin: 10px;
+        transition: background-color .5s;
+      }
+      .default {
+        background-color: gray;
+      }
+      .red {
+        background-color: red;
+      }
+      .yellow {
+        background-color: yellow;
+      }
+      .green {
+        background-color: green;
+      }
+
+    </style>
+    <title>红绿灯</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <ul>
+        <li class="default"></li>
+        <li class="default"></li>
+        <li class="default"></li>
+      </ul>
+    </div>
+  </body>
+  <script type="text/javascript">
+    const lis = document.querySelector("#wrapper ul").querySelectorAll("li");
+    const colors = ["red", "yellow", "green"];
+
+    // 定义一个灯对象，只有开关功能
+    const light = {
+      turnOn(elem, color) {
+        elem.setAttribute("class", color);
+      },
+      turnOff(elem) {
+        elem.setAttribute("class", "default");
+      },
+    }
+    // 定义一个交通灯对象，并和灯对象建立委托关系
+    const trfLight = Object.create(light);
+    // 加入交通灯特有功能
+    trfLight.init = function(lis, colors, timeArg = []) {
+      this.index = 0;
+      this.lis = lis;
+      this.colors = colors;
+      this.time; // 用于清空定时器
+      this.timeArg = timeArg.map((item) => {
+        return item * 1000;
+      }); //用于设定每个灯 亮的时间长短
+    }
+
+    trfLight.withOne = function() {
+      if(this.index > 2) {
+        this.index = 0;
+      }
+      return this.index++;
+    }
+
+    trfLight.start = function() {
+      let last = this.colors.length-1;
+
+      this.time = setInterval(() => {
+        let current = this.withOne();
+        if(current == 0){
+          this.turnOff(this.lis[last]);
+        }else{
+          this.turnOff(this.lis[current-1]);
+        }
+        this.turnOn(this.lis[current], this.colors[current]);
+      } ,2000);
+      return "let's go!"
+    }
+
+    trfLight.stop = function() {
+      clearInterval(this.time);
+      return 'stop ok';
+    }
+
+    // 为了实现每个灯亮的时间不同，增加一个start2， 在初始化的时候多传入一个时间数组表示亮灯时长
+    trfLight.start2 = function() {
+      let current = this.withOne();
+      goStart.call(this);
+
+      function goStart() {
+        let last = this.colors.length-1;
+        let nextTime = this.timeArg[current];
+        this.turnOn(this.lis[current], this.colors[current]);
+
+        function handle() {
+            this.turnOff(this.lis[current]); // 先关灯
+            current = this.withOne();
+            nextTime = this.timeArg[current]; //亮灯时长
+            this.turnOn(this.lis[current], this.colors[current]); // 开灯
+            setTimeout(handle.bind(this),nextTime); // 开一个定时器，进行下次调用
+        };
+        setTimeout(handle.bind(this),nextTime);
+      }
+    }
+    const myTrfLight = Object.create(trfLight);
+    myTrfLight.init(lis, colors, [1,2,3]);
+    myTrfLight.start2();
+
+  </script>
+</html>

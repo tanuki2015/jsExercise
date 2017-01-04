@@ -2,3 +2,5 @@
 
 trafficLight2是用行为委托的方式写的，除了”you don't konw the js“，其他都找不到这方面的资料，
 我就自己瞎写下。
+
+trafficLight3是增加了不同时长的定时功能，感觉还是写得有些乱，东西多一点思路就不清晰了。
