@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function strategy(name) {
+        const mapTable = {
+          s: 4,
+          a: 3,
+          b: 2,
+        };
+        return mapTable[name];
+      }
+
+      const calculate = (level, bonus) => strategy(level) * bonus;
+
+      《javascript设计模式与开发实践》中的策略模式，其实就是这个简单的东西 p75。
+    </script>
+  </body>
+</html>
