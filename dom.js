@@ -26,22 +26,50 @@
  */
 
 // 下面可以写个dom库做练习
-function getElementChildren(element) {
-  const length = element.childNodes.length;
-  if (length === 0) {
-    return null;
+// function getElementChildren(element) {
+//   const length = element.childNodes.length;
+//   if (length === 0) {
+//     return null;
+//   }
+//
+//   const nodes = [];
+//   for (let i = 0; i < length; i++) {
+//     if (element.childNodes[i].nodeType === 1) {
+//       nodes.push(element.childNodes[i]);
+//     }
+//   }
+//   return nodes;
+// }
+// const ul = document.querySelector('ul');
+// const lis = getElementChildren(ul);
+// const li = lis[0];
+// console.log(getElementChildren(li));
+// // console.log(lis);
+//
+// if (document.readyState === 'complete') {
+//   console.log('readyState!!!');
+// }
+
+$(function(){
+
+  function getElementTop(element) {
+    let current = element.offsetParent;
+    let actualTop = element.offsetTop;
+    while (current) {
+      actualTop += current.offsetTop;
+      current = current.offsetParent;
+    }
+    return actualTop;
   }
 
-  const nodes = [];
-  for (let i = 0; i < length; i++) {
-    if (element.childNodes[i].nodeType === 1) {
-      nodes.push(element.childNodes[i]);
+  const div = document.querySelector('div');
+  const divTop = getElementTop(div) + div.offsetHeight; // 偏移加上盒子本身的高度
+
+  window.addEventListener('scroll', function() {
+    // 这个地方兼容写法，否则对chrome不起作用
+    let viewPort = document.documentElement.scrollTop || document.body.scrollTop;
+    if (divTop < viewPort) {
+      div.style.display = 'block';
     }
-  }
-  return nodes;
-}
-const ul = document.querySelector('ul');
-const lis = getElementChildren(ul);
-const li = lis[0];
-console.log(getElementChildren(li));
-// console.log(lis);
+  });
+});
