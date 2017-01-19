@@ -176,3 +176,5 @@ function throttle(method, context) {
   }, 300)
 }
 ```
+
+想把dom的操作改成函数式，结果太乱了，算了，放弃。目前用原生js多写点纯函数就行了。
