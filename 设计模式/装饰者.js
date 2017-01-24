@@ -64,16 +64,17 @@ const Sale = {
   },
 
   calculate() {
-    // 没有税，1个税
+    let rate;
+    // 没有税 或 1个税
     if (this.tax.length === 0) {
       return this.price;
     } else if (this.tax.length === 1) {
-      const key = this.tax[0];
-      return this.price + this.price * this.taxTable[key];
+      rate = this.taxTable[this.tax[0]];
+      return this.price + (this.price * rate);
     }
     // 多个税
-    const rate = this.tax.reduce((prev, cur) => this.taxTable[prev] + this.taxTable[cur]);
-    return this.price + this.price * rate;
+    rate = this.tax.reduce((prev, cur) => this.taxTable[prev] + this.taxTable[cur]);
+    return this.price + (this.price * rate);
   },
 };
 
