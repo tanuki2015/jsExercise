@@ -23,9 +23,14 @@ function calculate() {
   getRed();
   result.sort((a, b) => a - b);
   getBlue();
+
   return result;
 }
 
-for (let i = 0; i < 100; i++) {
-  console.log(calculate());
+function getSeries(stake) {
+  for (let i = 0; i < stake; i++) {
+    console.log(calculate());
+  }
 }
+
+getSeries(1);
