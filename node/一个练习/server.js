@@ -1,14 +1,16 @@
-const http = require("http");
+const http = require('http');
+const url = require('url');
 
-function start() {
-  http.createServer(function(request, response) {
-    console.log('request received!');
-    response.writeHead(200, { "content-Type": "text/plain" });
-    response.write('hello, node.js!');
-    response.end();
-  }).listen(8888);
+function start(route, handle) {
+  function onRequest(request, response) {
+    const pathname = url.parse(request.url).pathname;
+    console.log(`Request for ${pathname} received.`);
 
-  console.log('server has started.');
+    route(handle, pathname, response);
+  }
+
+  http.createServer(onRequest).listen(8888);
+  console.log('Server has started.');
 }
 
 exports.start = start;
