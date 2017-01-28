@@ -33,4 +33,4 @@ function getSeries(stake) {
   }
 }
 
-getSeries(1);
+getSeries(5);
