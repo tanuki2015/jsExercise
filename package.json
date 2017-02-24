@@ -1,0 +1,27 @@
+{
+  "name": "jsExercise",
+  "version": "1.0.0",
+  "description": "domNode = {   nodeName: '', // 大写标签名   nodeType: 1~11, // element 1，attribute 2, text 3, document 9, fragment 11,   childNodes: [], // 子节点类数组   parentNode: aNode, // 父节点一个   previousSibling: pNode, // 上一个兄弟节点   nextSibling: nNode, // 下一个弟弟节点   firstChild: fNode, // 第一个子节点   lastChild: lNode, // 最后一个子节点",
+  "main": "charCodeAt.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tanuki2015/jsExercise"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tanuki2015/jsExercise/issues"
+  },
+  "homepage": "https://github.com/tanuki2015/jsExercise",
+  "devDependencies": {
+    "babel-jest": "^19.0.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "jest": "^19.0.2"
+  }
+}

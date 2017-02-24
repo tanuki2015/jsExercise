@@ -24,3 +24,8 @@ const promiseAll = Promise.all([promise2, promise3]);
 promiseAll
     .then(result => console.log(result))
     .catch(error => console.log(error));
+
+
+// then的链式写法......
+// 解决generator和co库解决异步问题。
+// es7 的 async 终极解决方案
